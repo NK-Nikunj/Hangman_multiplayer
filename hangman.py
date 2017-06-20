@@ -17,9 +17,9 @@ def print_screen(guess_word, guess, incorrect_guess_made, correct_guess_made, se
     
     sleep(2)
     
-    print "Yay! User2 won"
+    print "\n\nYay! User2 won"
     sleep(1.5)
-    print "Going back to home screen"
+    print "\nGoing back to home screen"
     sleep(3)
     start_interface()
         
@@ -66,9 +66,9 @@ def check_loss(guess_word, guess, incorrect_guess_made, correct_guess_made, secr
     
     sleep(2)
     
-    print("Yay! User1 won")
+    print("\n\nYay! User1 won")
     sleep(2)
-    print("Going back to main screen.")
+    print("\nGoing back to main screen.")
     sleep(4)
     start_interface()        
 
@@ -139,19 +139,18 @@ def user2(secret_word):
     
     guess_word = list(guess_word)
     guess_letter(secret_word, guess_word)
-    
+
 def check_validity(secret_word):
     """
     Checks whether the input word is genuine
-    """
-    if str(secret_word) in string.ascii_lowercase:
-        return guess_letter
-    else:
-        print("\nInvalid type. Use only letters and type only 1 word")
-        sleep(2)
-        return multiplayer()
-    
-
+    """   
+    x = 0
+    for i in range(len(secret_word)):   
+        if secret_word[i] in string.ascii_lowercase:
+            x += 1
+    if x == len(secret_word):
+        return True
+            
 
 def multiplayer():
     """
@@ -163,9 +162,17 @@ def multiplayer():
     print("-------------------------------------")
 
     secret_word = getpass("User1, select a word: ")
+    
     secret_word.lower()
+    val = check_validity(secret_word)
     secret_word = list(secret_word)
-    check_validity(secret_word)
+    
+    if val:
+        user2(secret_word)
+    else:
+        print("\nInvalid input, try again!")
+        sleep(2.5)
+        multiplayer()
     
     user2(secret_word)
 
@@ -216,7 +223,9 @@ def start_interface():
     if inp == "1":
         multiplayer()
     elif inp == "2":
-        print("Single player is under construction, should be here soon!")
+        print("\n\nSingle player is under construction, should be here soon!")
+        sleep(4)
+        start_interface()
     elif inp == "3":
         instruction()
     elif inp == "4":
