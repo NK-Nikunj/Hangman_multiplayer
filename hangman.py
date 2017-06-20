@@ -80,6 +80,10 @@ def guess_letter(secret_word, guess_word):
     global incorrect_guess_made
     global correct_guess_made
     global guess
+
+    incorrect_guess_made = ''
+    correct_guess_made = ''
+    guess = 6
     
     while secret_word != guess_word and guess > 0:
         system('cls')
