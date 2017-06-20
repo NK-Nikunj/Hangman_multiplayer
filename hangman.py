@@ -80,6 +80,10 @@ def guess_letter(secret_word, guess_word):
     global incorrect_guess_made
     global correct_guess_made
     global guess
+
+    incorrect_guess_made = ''
+    correct_guess_made = ''
+    guess = 6
     
     while secret_word != guess_word and guess > 0:
         system('cls')
@@ -139,17 +143,6 @@ def user2(secret_word):
     
     guess_word = list(guess_word)
     guess_letter(secret_word, guess_word)
-
-def check_validity(secret_word):
-    """
-    Checks whether the input word is genuine
-    """   
-    x = 0
-    for i in range(len(secret_word)):   
-        if secret_word[i] in string.ascii_lowercase:
-            x += 1
-    if x == len(secret_word):
-        return True
             
 
 def multiplayer():
@@ -164,11 +157,9 @@ def multiplayer():
     secret_word = getpass("User1, select a word: ")
     
     secret_word.lower()
-    val = check_validity(secret_word)
-    secret_word = list(secret_word)
     
-    if val:
-        user2(secret_word)
+    if secret_word.isalpha():
+        user2(list(secret_word))
     else:
         print("\nInvalid input, try again!")
         sleep(2.5)
