@@ -33,10 +33,8 @@ def check_length_letter(guess_let, secret_word, guess_word):
     if len(guess_let) == 1:
         return guess_letter
     else:
-        print("\nInvalid input. Try again")
-        sleep(1)
-        secret_word = list(secret_word)
-        guess_word = list(guess_word)
+        print("\nInvalid input. Add only one letter at a time!")
+        sleep(2)
         return guess_letter(secret_word, guess_word)
 
 
@@ -48,8 +46,8 @@ def check_letter(guess_let, secret_word, guess_word):
     if guess_let in string.ascii_lowercase:
         return guess_letter
     else:
-        print("\nInvalid type. Use only letters")
-        sleep(1)
+        print("\nInvalid input. Use only letters and not special characters!")
+        sleep(2)
         return guess_letter(secret_word, guess_word)
         
 
@@ -91,17 +89,17 @@ def guess_letter(secret_word, guess_word):
         guess_let = raw_input("\nGuess letter: ")
         
         guess_let.lower()
-        """        
-        if guess_letter in incorrect_guess_made:
+              
+        if guess_let in incorrect_guess_made:
             print "You have already used this guess, try another"
-            sleep(3)
+            sleep(2)
             guess_letter(secret_word, guess_word)
         
-        if guess_letter in correct_guess_made:
+        if guess_let in correct_guess_made:
             print "You have already used this guess, try another"
-            sleep(3)
+            sleep(2)
             guess_letter(secret_word, guess_word)
-        """                
+                      
         
         check_length_letter(guess_let, secret_word, guess_word)
         check_letter(guess_let, secret_word, guess_word)
