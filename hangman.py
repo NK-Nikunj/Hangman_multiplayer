@@ -131,26 +131,9 @@ def user2(secret_word):
     """
     system('cls')
 
-    print "User2, User1 has selected a word with", len(secret_word), "letters"
+    guess_word = "-"*len(secret_word)        
+    guess_letter(secret_word, list(guess_word))
 
-    guess_word = "-"*len(secret_word)    
-
-    print "\nHere is the word:", guess_word
-    
-    guess_word = list(guess_word)
-    guess_letter(secret_word, guess_word)
-
-def check_validity(secret_word):
-    """
-    Checks whether the input word is genuine
-    """   
-    x = 0
-    for i in range(len(secret_word)):   
-        if secret_word[i] in string.ascii_lowercase:
-            x += 1
-    if x == len(secret_word):
-        return True
-            
 
 def multiplayer():
     """
@@ -164,17 +147,13 @@ def multiplayer():
     secret_word = getpass("User1, select a word: ")
     
     secret_word.lower()
-    val = check_validity(secret_word)
-    secret_word = list(secret_word)
     
-    if val:
-        user2(secret_word)
+    if secret_word.isalpha():
+        user2(list(secret_word))
     else:
         print("\nInvalid input, try again!")
         sleep(2.5)
         multiplayer()
-    
-    user2(secret_word)
 
 def instruction():
     """
@@ -209,6 +188,13 @@ def start_interface():
     Prints the initial screen and takes input to go to next screen
     """
     system('cls')
+    global incorrect_guess_made
+    global correct_guess_made
+    global guess    
+    
+    correct_guess_made = ''      #reassigning correct guesses to none once game is over
+    incorrect_guess_made = ''    #reassigning incorrect guesses to none once game is over
+    guess = 6                    #reassigning number of guesses to 6 once game is over
     
     print("Welcome to HANGMAN")
     print("-----------------------")
